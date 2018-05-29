@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "location.h"
+#include "inventory.h"
 
 
 static char input[100];   // string buffer for keyboard input
@@ -38,6 +39,21 @@ static int parseAndExecute()
     }
     else if (strcmp(verb, "go") == 0) {
       executeGo(noun);
+    }
+    else if (strcmp(verb, "get") == 0) {
+      executeGet(noun);
+    }
+    else if (strcmp(verb, "drop") == 0) {
+      executeDrop(noun);
+    }
+    else if (strcmp(verb, "give") == 0) {
+      executeGive(noun);
+    }
+    else if (strcmp(verb, "ask") == 0) {
+      executeAsk(noun);
+    }
+    else if (strcmp(verb, "inventory") == 0) {
+      executeInventory();
     }
     else {
       printf("I don't know how to '%s'.\n", verb);

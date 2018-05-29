@@ -30,9 +30,19 @@ void executeGo(const char *noun)
   else if (obj == player->location) {
     printf("You are already there.\n");
   }
-  else {
+  /* go <location> */
+  else if (getPassageTo(obj) != NULL) {
     printf("OK.\n");
     player->location = obj;
     executeLook("around");
+  }
+  /* go <passage> */
+  else if (obj->location == player->location && obj->destination != NULL) {
+    printf("OK.\n");
+    player->location = obj->destination;
+    executeLook("around");
+  }
+  else {
+    printf("You can't go there!\n");
   }
 }

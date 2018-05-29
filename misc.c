@@ -5,6 +5,21 @@
 #include "object.h"
 #include "misc.h"
 
+/* getPassageTo function - scans through all objects untill we encounter a
+ * passage from player->location to targetLocation */
+OBJECT *getPassageTo(OBJECT *targetLocation)
+{
+  OBJECT *obj;
+  /* scan through all objects until we find a passage running from
+   * player->location to targetLocation */
+  for (obj = objs; obj < endOfObjs; obj++) {
+    if (obj->location == player->location && obj->destination ==
+        targetLocation) {
+      return obj;         // return a pointer to the passage object
+    }
+  }
+  return NULL;            // return NULL if no passage exists
+}
 
 OBJECT *parseObject(const char *noun)
 {
@@ -17,6 +32,19 @@ OBJECT *parseObject(const char *noun)
   return found;
 }
 
+/* personHere function returns a pointer to the person at the same location as
+ * the player, or NULL if the player is alone */
+OBJECT *personHere(void)
+{
+  OBJECT *obj;
+  for (obj = objs; obj < endOfObjs; obj++)
+  {
+    if (obj->location == player->location && obj == guard) {
+      return obj;
+    }
+  }
+  return NULL;
+}
 
 int listObjectsAtLocation(OBJECT *location)
 {

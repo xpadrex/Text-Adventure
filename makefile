@@ -1,6 +1,6 @@
 # makefile for text_adventure
 
-text_adventure.o: text_adventure.c location.h
+text_adventure.o: text_adventure.c location.h inventory.h
 	gcc -c text_adventure.c
 
 location.o: location.c misc.h object.h location.h
@@ -12,5 +12,8 @@ object.o: object.c object.h
 misc.o: misc.c misc.h object.h
 	gcc -c misc.c
 
-text_adventure: text_adventure.o location.o object.o misc.o
-	gcc text_adventure.o location.o object.o misc.o -o text_adventure
+inventory.o: inventory.c object.h misc.h
+	gcc -c inventory.c
+
+text_adventure: text_adventure.o location.o object.o misc.o inventory.o
+	gcc text_adventure.o location.o object.o misc.o inventory.o -o text_adventure
